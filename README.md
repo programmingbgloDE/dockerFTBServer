@@ -1,11 +1,6 @@
 # Docker container for FTB Server
-
-To get your server up and running in no time.
----
 Table of Contents
 - [Docker container for FTB Server](#docker-container-for-ftb-server)
-  - [To get your server up and running in no time.](#to-get-your-server-up-and-running-in-no-time)
-  - [- Docker compose file](#--docker-compose-file)
   - [Prerequisites](#prerequisites)
   - [Setup](#setup)
   - [Run Container](#run-container)
@@ -13,6 +8,9 @@ Table of Contents
     - [Pack id and version id](#pack-id-and-version-id)
       - [Example](#example)
   - [Docker compose file](#docker-compose-file)
+  - [Troubleshooting](#troubleshooting)
+    - [No `docker compose`](#no-docker-compose)
+    - [`Bind for 0.0.0.0:25565 failed`](#bind-for-000025565-failed)
 ---
 
 ## Prerequisites
@@ -121,3 +119,47 @@ to see the log output on your screen, or
 docker compose start
 ```
 to start the container in the background and be able to log out of your server without the container stopping.
+
+---
+
+## Troubleshooting
+
+### No `docker compose`
+ If you get the following error
+ ```
+ docker: 'compose' is not a docker command.
+See 'docker --help'
+ ```
+you are running an older version of docker compose.
+You just need to replace
+```
+docker compose
+```
+with
+```
+docker-compose
+```
+
+### `Bind for 0.0.0.0:25565 failed`
+If you encounter the following error
+```
+Creating ftb-server_server_1 ... 
+Creating ftb-server_server_1 ... error
+
+ERROR: for ftb-server_server_1  Cannot start service server: driver failed programming external connectivity on endpoint ftb-server_server_1 (97f0db088c187a8d51149b9db44483bba7c6784e7442b6dc64d2eb9431a5005c): Bind for 0.0.0.0:25565 failed: port is already allocated
+
+ERROR: for server  Cannot start service server: driver failed programming external connectivity on endpoint ftb-server_server_1 (97f0db088c187a8d51149b9db44483bba7c6784e7442b6dc64d2eb9431a5005c): Bind for 0.0.0.0:25565 failed: port is already allocated
+ERROR: Encountered errors while bringing up the project.
+```
+
+This means that there is already a service runnig on port 25565, which is the standard port for Minecraft. If this is the case, you need to change the exposed port in your `docker-compose.yml`.
+
+From
+```
+      - "25565:25565"
+```
+to
+```
+      - "25566:25565"
+```
+for example. This will expose your server on the new port. But don't forget to add the port to your address for your minecraft server.
