@@ -11,13 +11,12 @@ Table of Contents
   - [Troubleshooting](#troubleshooting)
     - [No `docker compose`](#no-docker-compose)
     - [`Bind for 0.0.0.0:25565 failed`](#bind-for-000025565-failed)
----
+
 
 ## Prerequisites
 
 + you need to have docker and docker compose installed
 
----
 
 ## Setup
 
@@ -33,7 +32,6 @@ Table of Contents
 
 + now you can run a container
 
----
 
 ## Run Container
 
@@ -62,7 +60,6 @@ https://api.modpacks.ch/public/modpack/93/2114/server/linux
 for the linux version.
 In this link, the first number, here 93, is the pack id and the second number (2114) is the version id. So to use the container with this pack you would insert those numbers into the two environment variables.
 
----
 
 ## Docker compose file
 
@@ -120,7 +117,6 @@ docker compose start
 ```
 to start the container in the background and be able to log out of your server without the container stopping.
 
----
 
 ## Troubleshooting
 
