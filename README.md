@@ -25,7 +25,7 @@ Table of Contents
 + To build the container run
 
     ```
-    docker build -t ftb_server:latest .
+    docker build --build-args:"JAVA_VERSION=8" -t ftb_server:latest .
     ```
 
     in the downloaded Directory
